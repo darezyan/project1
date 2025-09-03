@@ -12,6 +12,9 @@ type LinkerProps = {
 
 export const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
   e.preventDefault();
+
+  if (typeof document === "undefined") return; // ✅ guard for SSR
+
   const href = e.currentTarget.href;
   const targetId = href.replace(/.*#/, "");
   const elem = document.getElementById(targetId);
@@ -19,6 +22,7 @@ export const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>)
     behavior: "smooth",
   });
 };
+
 
 const Linker = ({ className, field }: LinkerProps) => {
  
